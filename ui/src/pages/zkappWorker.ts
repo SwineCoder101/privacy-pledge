@@ -23,7 +23,7 @@ const functions = {
     Mina.setActiveInstance(Berkeley);
   },
   loadContract: async (args: {}) => {
-    const { Add } = await import("../../../contracts/build/src/Add.js");
+    const { Add } = await import("../../../contracts/build/src/Add");
     state.Add = Add;
   },
   compileContract: async (args: {}) => {

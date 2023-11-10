@@ -15,6 +15,17 @@ npm run test
 npm run testw # watch mode
 ```
 
+## How to deploy (Do only once, delete contract keys to deploy to a new contract address)
+
+```sh
+zk deploy test3
+```
+
+Contract Interact
+Usage:
+node build/src/interact.js <deployAlias>
+(Not Working) Because the zkapp account was not found in the cache. Try calling `await fetchAccount(zkappAddress)` first.
+
 ### UI
 build static
 `npm run build` without type:module
@@ -22,3 +33,7 @@ build static
 deploy static github pages
 `npm run deploy` with   `"type": "module",`
 
+### Explorer
+
+test3
+https://minascan.io/berkeley/account/B62qpwCZxTVeoP1xuXGvJmgGoCoGuVTpKYfcDktoBhjxMXmQ69PbrUs/txs
