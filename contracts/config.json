@@ -1,4 +1,13 @@
 {
   "version": 1,
-  "deployAliases": {}
+  "deployAliases": {
+    "test3": {
+      "url": "https://proxy.berkeley.minaexplorer.com/graphql",
+      "keyPath": "keys/test3.json",
+      "feepayerKeyPath": "keys/zkhack-wallet.json",
+      "feepayerAlias": "zkhack-wallet",
+      "fee": "0.1",
+      "smartContract": "Add"
+    }
+  }
 }
