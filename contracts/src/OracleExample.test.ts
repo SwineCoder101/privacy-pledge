@@ -12,7 +12,7 @@ let proofsEnabled = false;
 
 // The public key of our trusted data provider
 const ORACLE_PUBLIC_KEY =
-  'B62qoAE4rBRuTgC42vqvEyUqCGhaZsW58SKVW4Ht8aYqP9UTvxFWBgy';
+  'B62qph1U5UQofXsN1gRPtJAH4GCGkaSSozUysqV7e3S8rRdcUaWyaWi';
 
 describe('OracleExample', () => {
   let deployerAccount: PublicKey,
@@ -114,7 +114,7 @@ describe('OracleExample', () => {
       await localDeploy();
 
       const response = await fetch(
-        "http://localhost:3000/api/credit-score?user=1"
+        'http://localhost:3000/api/credit-score?user=1'
         // 'https://07-oracles.vercel.app/api/credit-score?user=1'
       );
       const data = await response.json();
@@ -123,6 +123,7 @@ describe('OracleExample', () => {
       const creditScore = Field(data.data.creditScore);
       const signature = Signature.fromBase58(data.signature);
 
+      // TODO: test not passing: the sender from Local is different from hard coded
       const txn = await Mina.transaction(senderAccount, () => {
         zkApp.verify(id, creditScore, signature);
       });
@@ -133,7 +134,6 @@ describe('OracleExample', () => {
       const verifiedEventValue = events[0].event.data.toFields(null)[0];
       expect(verifiedEventValue).toEqual(id);
     });
-
     it('throws an error if the credit score is below 700 even if the provided signature is valid', async () => {
       await localDeploy();
 

@@ -4,6 +4,8 @@
 
 ## Run Oracle
 
+Set `.env` PRIVATE_KEY and publicKey to the oracle in contract folder
+
 ```sh
 cd oracle
 ```
