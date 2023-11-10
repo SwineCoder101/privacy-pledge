@@ -20,5 +20,5 @@ build static
 `npm run build` without type:module
 
 deploy static github pages
-`npm run deploy`
+`npm run deploy` with   `"type": "module",`
 
