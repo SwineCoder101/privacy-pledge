@@ -114,7 +114,8 @@ describe('OracleExample', () => {
       await localDeploy();
 
       const response = await fetch(
-        'https://07-oracles.vercel.app/api/credit-score?user=1'
+        "http://localhost:3000/api/credit-score?user=1"
+        // 'https://07-oracles.vercel.app/api/credit-score?user=1'
       );
       const data = await response.json();
 

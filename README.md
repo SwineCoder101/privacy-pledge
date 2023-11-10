@@ -2,6 +2,16 @@
 
 # Instructions
 
+## Run Oracle
+
+```sh
+cd oracle
+```
+
+```sh
+npm run dev
+```
+
 ## Contracts
 
 ```sh
