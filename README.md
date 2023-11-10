@@ -13,6 +13,7 @@ npm run build
 ```sh
 npm run test
 npm run testw # watch mode
+npm run test Add # test only one contract
 ```
 
 ### How to deploy (Do only once, delete contract keys to deploy to a new contract address)
