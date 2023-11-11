@@ -31,7 +31,19 @@ npm run test Add # test only one contract
 ### How to deploy (Do only once, delete contract keys to deploy to a new contract address)
 
 ```sh
-zk deploy test3
+zk config
+```
+
+Interactive: 
+- CONTRACT_NAME
+- https://proxy.berkeley.minaexplorer.com/graphql or https://proxy.testworld.minaexplorer.com/graphql
+- 0.1
+
+Get the smart contract address from the explorer and upcate it in the `index.page.tsx`.
+It takes few minutes for the address to show up.
+
+```sh
+zk deploy DEPLOY_ALIAS
 ```
 
 ### Contract Interact
@@ -51,3 +63,13 @@ deploy static github pages
 
 test3
 https://minascan.io/berkeley/account/B62qpwCZxTVeoP1xuXGvJmgGoCoGuVTpKYfcDktoBhjxMXmQ69PbrUs/txs
+
+# Extra
+
+## Testing with light node
+
+```sh
+zk lightnet start --no-archive
+```
+
+https://github.com/o1-labs/zkapp-cli/pull/510
