@@ -43,3 +43,41 @@ export class OracleExample extends SmartContract {
     this.emitEvent('verified', id);
   }
 }
+
+/**
+ * @state
+ * - myBalance(voter publicKey): Number
+ * - myReputation(voter publicKey): Number
+ * - voteAmount(proposalId Number): Number
+ * 
+ * - shareVotes(voter publicKey): Number
+ * - totalBalance(): Number
+ * - votesYes(proposalId Number): Number
+ * - votesNo(proposalId Number): Number
+ * - votingPower(vp Number): Number
+ * - requests(): 
+ * 
+ * @method
+ * - deposit(amount, voter publicKey)
+ * - vote(proposalId Number,(yes, no) bool, voter publicKey)
+ * 
+ * - requestFund(details String, amount Number)
+ * -- with default deadline like 3 days
+ * -- Calls oracle to update voting power with reputation
+ * - closeVoting(proposalId)
+ */
+
+// oracle. get number of investments, size of investements, total return, number of investees, last investment date
+
+
+/**
+ * @state
+ * - myBalance(voter publicKey): Number
+ * - myReputation(voter publicKey): Number
+ * - requestVotes(id Number): Number
+
+ * @method
+ * - deposit(amount Number, voter publicKey)
+ * - vote(proposalId Number, voter publicKey)
+
+ */
