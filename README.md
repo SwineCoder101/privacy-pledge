@@ -39,12 +39,12 @@ Interactive:
 - https://proxy.berkeley.minaexplorer.com/graphql or https://proxy.testworld.minaexplorer.com/graphql
 - 0.1
 
-Get the smart contract address from the explorer and upcate it in the `index.page.tsx`.
-It takes few minutes for the address to show up.
-
 ```sh
 zk deploy DEPLOY_ALIAS
 ```
+
+Get the smart contract address from the explorer and upcate it in the `index.page.tsx`.
+It takes few minutes for the address to show up.
 
 ### Contract Interact
 Usage:

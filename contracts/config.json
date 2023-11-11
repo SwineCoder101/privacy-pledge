@@ -32,6 +32,14 @@
       "feepayerAlias": "zkhack-wallet",
       "fee": ".5",
       "smartContract": "Add"
+    },
+    "test5": {
+      "url": "https://proxy.berkeley.minaexplorer.com/graphql",
+      "keyPath": "keys/test5.json",
+      "feepayerKeyPath": "keys/zkhack-wallet.json",
+      "feepayerAlias": "zkhack-wallet",
+      "fee": "0.1",
+      "smartContract": "Add"
     }
   }
 }
