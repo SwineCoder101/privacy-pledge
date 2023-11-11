@@ -3,6 +3,9 @@ import "./reactCOIServiceWorker";
 import ZkappWorkerClient from "./zkappWorkerClient";
 import { PublicKey, Field } from "o1js";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Progress } from "@/components/ui/progress";
+import React from "react";
 
 let transactionFee = 0.1;
 
@@ -287,25 +290,25 @@ export default function Home() {
         <div style={{ padding: 0 }}>
           Current state in zkApp: {state.currentNum!.toString()}{" "}
         </div>
-        <button
+        <Button
           onClick={onSendTransaction}
           disabled={state.creatingTransaction}
         >
           Send Transaction
-        </button>
-        <button onClick={onRefreshCurrentNum}>Get Latest State</button>
-        <button
+        </Button>
+        <Button onClick={onRefreshCurrentNum}>Get Latest State</Button>
+        <Button
           onClick={() => setReputationValue(Field(234))}
           disabled={state.creatingTransaction}
         >
           Set reputation
-        </button>
-        <button
+        </Button>
+        <Button
           onClick={onRefreshCurrentReputation}
           disabled={state.creatingTransaction}
         >
           Get Latest Reputation
-        </button>
+        </Button>
         <Button>Click me</Button>
       </div>
     );
@@ -314,8 +317,11 @@ export default function Home() {
   return (
     <>
       <Header />
-      <div style={{ padding: 0 }}>
-        <div style={{ padding: 0 }}>
+      <div className="min-h-[calc(100vh-64px)] grid grid-cols-3 p-4 gap-4 rounded">
+        <div className="col-span-1 bg-gray-200 p-4 rounded-md">
+          <FirstColumn />
+        </div>
+        <div className="col-span-2 bg-gray-300 p-4 rounded-md">
           {setup}
           {accountDoesNotExist}
           {mainContent}
@@ -358,5 +364,45 @@ const Header = () => {
         </nav>
       </div>
     </header>
+  );
+};
+
+const FirstColumn = () => {
+  const [progress, setProgress] = React.useState(13);
+
+  React.useEffect(() => {
+    const timer = setTimeout(() => setProgress(66), 500);
+    return () => clearTimeout(timer);
+  }, []);
+
+  const handleDeposit = () => {
+    // Logic to handle depositing balance
+  };
+
+  return (
+    <div className="h-12">
+      <h2 className="mt-10 scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight transition-colors first:mt-0">
+        Information
+      </h2>
+      <Progress value={progress} className="w-[60%]" />
+      <div>Deposited Balance</div>
+      <div>Reputation</div>
+      <h2 className="mt-10 scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight transition-colors first:mt-0">
+        Deposit fund to the pool
+      </h2>
+      <div className="flex items-center justify-between mt-4">
+        <Input
+          type="number"
+          placeholder="Set Amount"
+          className="border border-gray-300 rounded-md px-2 py-1 w-full"
+        />
+        <Button
+          className="bg-blue-500 text-white px-4 py-2 rounded-md"
+          onClick={handleDeposit}
+        >
+          Deposit
+        </Button>
+      </div>
+    </div>
   );
 };

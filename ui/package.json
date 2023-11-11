@@ -12,6 +12,7 @@
     "deploy": "touch out/.nojekyll && node ./ghp-postbuild && git add -f out && cd .. && git commit -m \"Deploy gh-pages\" && git subtree push --prefix ui/out origin gh-pages"
   },
   "dependencies": {
+    "@radix-ui/react-progress": "^1.0.3",
     "@radix-ui/react-slot": "^1.0.2",
     "@types/node": "20.9.0",
     "@types/react": "18.2.37",
