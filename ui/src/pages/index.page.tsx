@@ -4,6 +4,7 @@ import ZkappWorkerClient from "./zkappWorkerClient";
 import { PublicKey, Field } from "o1js";
 import GradientBG from "../components/GradientBG.js";
 import styles from "../styles/Home.module.css";
+import { Button } from "@/components/ui/button"
 
 let transactionFee = 0.1;
 
@@ -313,6 +314,7 @@ export default function Home() {
         >
           Get Latest Reputation
         </button>
+        <Button>Click me</Button>
       </div>
     );
   }
