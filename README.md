@@ -75,3 +75,13 @@ zk lightnet start --no-archive
 ```
 
 https://github.com/o1-labs/zkapp-cli/pull/510
+
+# Troubleshoots
+
+Couldn't send zkApp command: (invalid ("No verification key found for proved account update" (account_id (ACCOUNT_ID 0x...))))
+
+> Probably the wallet is connected to the wrong network
+
+# Tips
+
+Can check current zkApp states directly on the explorer

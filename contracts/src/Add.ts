@@ -7,6 +7,7 @@ export class Add extends SmartContract {
   init() {
     super.init();
     this.num.set(Field(1));
+    this.reputation.set(Field(12));
   }
 
   @method update() {
