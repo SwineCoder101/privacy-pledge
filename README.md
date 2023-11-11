@@ -43,16 +43,18 @@ Interactive:
 zk deploy DEPLOY_ALIAS
 ```
 
-Get the smart contract address from the explorer and upcate it in the `index.page.tsx`.
+Get the smart contract address from `keys` and update it in the `index.page.tsx`.
 It takes few minutes for the address to show up.
 
 ### Contract Interact
+
 Usage:
 node build/src/interact.js <deployAlias>
 example: node build/src/interact.js test3
 (Not Working) Because the zkapp account was not found in the cache. Try calling `await fetchAccount(zkappAddress)` first.
 
 ## UI
+
 build static
 `npm run build` without type:module
 
@@ -64,7 +66,7 @@ deploy static github pages
 test3
 https://minascan.io/berkeley/account/B62qpwCZxTVeoP1xuXGvJmgGoCoGuVTpKYfcDktoBhjxMXmQ69PbrUs/txs
 
-# Extra
+# Extras
 
 ## Testing with light node
 

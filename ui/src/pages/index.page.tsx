@@ -9,7 +9,7 @@ let transactionFee = 0.1;
 
 // TODO: Update the PublicKey everytime a new smart contract is deployed to the testnet
 const zkappPublicKey = PublicKey.fromBase58(
-  "B62qqCS2dyfDxgJyLB3C4gSuYZYm2t8AqKgRa8hkiqDTtcnvGUM83xo"
+  "B62qpEozJn3aH6UQgwW4VYoK7fzriQx1SAaFptEtc3AfyeB2vc65Dmf"
 );
 
 export default function Home() {
