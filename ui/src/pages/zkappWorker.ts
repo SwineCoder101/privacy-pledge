@@ -37,6 +37,8 @@ const functions = {
     const publicKey = PublicKey.fromBase58(args.publicKey58);
     state.zkapp = new state.Add!(publicKey);
   },
+
+  // Start of Custom Calls
   getNum: async (args: {}) => {
     const currentNum = await state.zkapp!.num.get();
     return JSON.stringify(currentNum.toJSON());
@@ -47,6 +49,8 @@ const functions = {
     });
     state.transaction = transaction;
   },
+  // End of Custom Calls
+
   proveUpdateTransaction: async (args: {}) => {
     await state.transaction!.prove();
   },

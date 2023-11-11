@@ -64,4 +64,16 @@ describe('Add', () => {
     const updatedNum = zkApp.num.get();
     expect(updatedNum).toEqual(Field(3));
   });
+
+  it.only('reputation should works', async () => {
+    await localDeploy();
+
+    const txn = await Mina.transaction(senderAccount, () => {
+      zkApp.setReputation(Field(23));
+    });
+    await txn.prove();
+    await txn.sign([senderKey]).send();
+
+    expect(zkApp.reputation.get()).toEqual(Field(23));
+  });
 });
