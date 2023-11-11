@@ -10,7 +10,6 @@ yarn dev
 pnpm dev
 ```
 
-
 --
 
 build static

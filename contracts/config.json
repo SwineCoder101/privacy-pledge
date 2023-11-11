@@ -8,6 +8,30 @@
       "feepayerAlias": "zkhack-wallet",
       "fee": "0.1",
       "smartContract": "Add"
+    },
+    "test4": {
+      "url": "https://proxy.berkeley.minaexplorer.com/graphql",
+      "keyPath": "keys/test4.json",
+      "feepayerKeyPath": "keys/zkhack-wallet.json",
+      "feepayerAlias": "zkhack-wallet",
+      "fee": "0.1",
+      "smartContract": "Add"
+    },
+    "test1": {
+      "url": "https://proxy.testworld.minaexplorer.com/graphql",
+      "keyPath": "keys/test1.json",
+      "feepayerKeyPath": "keys/zkhack-wallet.json",
+      "feepayerAlias": "zkhack-wallet",
+      "fee": ".1",
+      "smartContract": "Add"
+    },
+    "test2": {
+      "url": "https://proxy.testworld.minaexplorer.com/graphql",
+      "keyPath": "keys/test2.json",
+      "feepayerKeyPath": "keys/zkhack-wallet.json",
+      "feepayerAlias": "zkhack-wallet",
+      "fee": ".5",
+      "smartContract": "Add"
     }
   }
 }
