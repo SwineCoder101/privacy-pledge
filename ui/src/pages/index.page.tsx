@@ -2,9 +2,7 @@ import { useEffect, useState } from "react";
 import "./reactCOIServiceWorker";
 import ZkappWorkerClient from "./zkappWorkerClient";
 import { PublicKey, Field } from "o1js";
-import GradientBG from "../components/GradientBG.js";
-import styles from "../styles/Home.module.css";
-import { Button } from "@/components/ui/button"
+import { Button } from "@/components/ui/button";
 
 let transactionFee = 0.1;
 
@@ -261,7 +259,6 @@ export default function Home() {
 
   let setup = (
     <div
-      className={styles.start}
       style={{ fontWeight: "bold", fontSize: "1.5rem", paddingBottom: "5rem" }}
     >
       {stepDisplay}
@@ -287,28 +284,23 @@ export default function Home() {
   if (state.hasBeenSetup && state.accountExists) {
     mainContent = (
       <div style={{ justifyContent: "center", alignItems: "center" }}>
-        <div className={styles.center} style={{ padding: 0 }}>
+        <div style={{ padding: 0 }}>
           Current state in zkApp: {state.currentNum!.toString()}{" "}
         </div>
         <button
-          className={styles.card}
           onClick={onSendTransaction}
           disabled={state.creatingTransaction}
         >
           Send Transaction
         </button>
-        <button className={styles.card} onClick={onRefreshCurrentNum}>
-          Get Latest State
-        </button>
+        <button onClick={onRefreshCurrentNum}>Get Latest State</button>
         <button
-          className={styles.card}
           onClick={() => setReputationValue(Field(234))}
           disabled={state.creatingTransaction}
         >
           Set reputation
         </button>
         <button
-          className={styles.card}
           onClick={onRefreshCurrentReputation}
           disabled={state.creatingTransaction}
         >
@@ -320,14 +312,51 @@ export default function Home() {
   }
 
   return (
-    <GradientBG>
-      <div className={styles.main} style={{ padding: 0 }}>
-        <div className={styles.center} style={{ padding: 0 }}>
+    <>
+      <Header />
+      <div style={{ padding: 0 }}>
+        <div style={{ padding: 0 }}>
           {setup}
           {accountDoesNotExist}
           {mainContent}
         </div>
       </div>
-    </GradientBG>
+    </>
   );
 }
+
+const Header = () => {
+  return (
+    <header className="bg-gray-800 text-white sticky top-0">
+      <div className="container mx-auto flex items-center justify-between py-4 px-6">
+        <a href="#" className="text-xl font-bold">
+          Privacy-Pledge
+        </a>
+        <nav>
+          <ul className="flex space-x-4">
+            <li>
+              <a href="#" className="hover:text-gray-300">
+                Home
+              </a>
+            </li>
+            <li>
+              <a href="#" className="hover:text-gray-300">
+                Dashboard
+              </a>
+            </li>
+            <li>
+              <a href="#" className="hover:text-gray-300">
+                Projects
+              </a>
+            </li>
+            <li>
+              <a href="#" className="hover:text-gray-300">
+                Profile
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+  );
+};
