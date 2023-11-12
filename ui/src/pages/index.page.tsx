@@ -12,6 +12,7 @@ let transactionFee = 0.1;
 const zkappPublicKey = PublicKey.fromBase58(
   "B62qpEozJn3aH6UQgwW4VYoK7fzriQx1SAaFptEtc3AfyeB2vc65Dmf"
 );
+const voteAppPublicKey = PublicKey.fromBase58("");
 
 const requestDatas = [
   {
@@ -36,6 +37,7 @@ export default function Home() {
     currentNum: null as null | Field,
     publicKey: null as null | PublicKey,
     zkappPublicKey: null as null | PublicKey,
+    voteAppPublicKey: null as null | PublicKey,
     creatingTransaction: false,
   });
 
@@ -54,6 +56,71 @@ export default function Home() {
       });
     }
 
+    //   (async () => {
+    //     if (!state.hasBeenSetup) {
+    //       setDisplayText("Loading web worker...");
+    //       console.log("Loading web worker...");
+    //       const zkappWorkerClient = new ZkappWorkerClient();
+    //       await timeout(5);
+
+    //       setDisplayText("Done loading web worker");
+    //       console.log("Done loading web worker");
+
+    //       await zkappWorkerClient.setActiveInstanceToBerkeley();
+
+    //       const mina = (window as any).mina;
+
+    //       if (mina == null) {
+    //         setState({ ...state, hasWallet: false });
+    //         return;
+    //       }
+
+    //       const publicKeyBase58: string = (await mina.requestAccounts())[0];
+    //       const publicKey = PublicKey.fromBase58(publicKeyBase58);
+
+    //       console.log(`Using key:${publicKey.toBase58()}`);
+    //       setDisplayText(`Using key:${publicKey.toBase58()}`);
+
+    //       setDisplayText("Checking if fee payer account exists...");
+    //       console.log("Checking if fee payer account exists...");
+
+    //       const res = await zkappWorkerClient.fetchAccount({
+    //         publicKey: publicKey!,
+    //       });
+    //       const accountExists = res.error == null;
+
+    //       await zkappWorkerClient.loadContract();
+
+    //       console.log("Compiling zkApp...");
+    //       setDisplayText("Compiling zkApp...");
+    //       await zkappWorkerClient.compileContract();
+    //       console.log("zkApp compiled");
+    //       setDisplayText("zkApp compiled...");
+
+    //       await zkappWorkerClient.initZkappInstance(zkappPublicKey);
+
+    //       console.log("Getting zkApp state...");
+    //       setDisplayText("Getting zkApp state...");
+    //       await zkappWorkerClient.fetchAccount({ publicKey: zkappPublicKey });
+    //       const currentNum = await zkappWorkerClient.getNum();
+    //       console.log(`Current state in zkApp: ${currentNum.toString()}`);
+    //       setDisplayText("");
+
+    //       setState({
+    //         ...state,
+    //         zkappWorkerClient,
+    //         hasWallet: true,
+    //         hasBeenSetup: true,
+    //         publicKey,
+    //         zkappPublicKey,
+    //         accountExists,
+    //         currentNum,
+    //       });
+    //     }
+    //   })();
+    // }, []);
+
+    // Init Custom Vote Contract
     (async () => {
       if (!state.hasBeenSetup) {
         setDisplayText("Loading web worker...");
@@ -87,21 +154,21 @@ export default function Home() {
         });
         const accountExists = res.error == null;
 
-        await zkappWorkerClient.loadContract();
+        await zkappWorkerClient.loadVoteContract();
 
         console.log("Compiling zkApp...");
         setDisplayText("Compiling zkApp...");
-        await zkappWorkerClient.compileContract();
+        await zkappWorkerClient.compileVoteContract();
         console.log("zkApp compiled");
         setDisplayText("zkApp compiled...");
 
-        await zkappWorkerClient.initZkappInstance(zkappPublicKey);
+        await zkappWorkerClient.initVoteInstance(zkappPublicKey);
 
         console.log("Getting zkApp state...");
         setDisplayText("Getting zkApp state...");
-        await zkappWorkerClient.fetchAccount({ publicKey: zkappPublicKey });
-        const currentNum = await zkappWorkerClient.getNum();
-        console.log(`Current state in zkApp: ${currentNum.toString()}`);
+        await zkappWorkerClient.fetchAccount({ publicKey: voteAppPublicKey });
+        // const currentNum = await zkappWorkerClient.getNum();
+        // console.log(`Current state in zkApp: ${currentNum.toString()}`);
         setDisplayText("");
 
         setState({
@@ -112,7 +179,6 @@ export default function Home() {
           publicKey,
           zkappPublicKey,
           accountExists,
-          currentNum,
         });
       }
     })();
@@ -320,7 +386,18 @@ export default function Home() {
         >
           Get Latest Reputation
         </Button>
-        <Button>Click me</Button>
+        <Button
+          onClick={async () => {
+            await state.zkappWorkerClient!.fetchAccount({
+              publicKey: state.zkappPublicKey!,
+            });
+            const lastEvent: any = await state.zkappWorkerClient!.fetchEvents();
+            console.log(`Current state in zkApp: ${lastEvent.toString()}`);
+            setDisplayText("");
+          }}
+        >
+          Test fetch Events
+        </Button>
       </div>
     );
   }

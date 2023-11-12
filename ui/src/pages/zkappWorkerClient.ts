@@ -38,7 +38,26 @@ export default class ZkappWorkerClient {
     });
   }
 
+  // *********************************************
+  // Setup Vote Contract
+  // *********************************************
+  loadVoteContract() {
+    return this._call("loadVoteContract", {});
+  }
+
+  compileVoteContract() {
+    return this._call("compileVoteContract", {});
+  }
+
+  initVoteInstance(publicKey: PublicKey) {
+    return this._call("initVoteInstance", {
+      publicKey58: publicKey.toBase58(),
+    });
+  }
+
+  // *********************************************
   // Start of Custom Calls
+  // *********************************************
   async getNum(): Promise<Field> {
     const result = await this._call("getNum", {});
     return Field.fromJSON(JSON.parse(result as string));
@@ -55,6 +74,12 @@ export default class ZkappWorkerClient {
 
   setReputation({ amount }: { amount: Field }) {
     return this._call("setReputation", { amount });
+  }
+
+  // Events from my Custom Vote App
+  async fetchEvents() {
+    const result = await this._call("fetchEvents", {});
+    return result;
   }
   // End of Custom Calls
 

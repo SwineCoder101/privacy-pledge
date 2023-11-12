@@ -5,11 +5,15 @@ type Transaction = Awaited<ReturnType<typeof Mina.transaction>>;
 // ---------------------------------------------------------------------------------------
 
 import type { Add } from "../../../contracts/src/Add";
+import type { VoteRequestCounterContract } from "../../../contracts/src/VoteRequestCounterContract";
 
 const state = {
   Add: null as null | typeof Add,
   zkapp: null as null | Add,
   transaction: null as null | Transaction,
+  // My Voting Contract
+  VoteRequestCounterContract: null as null | typeof VoteRequestCounterContract,
+  voteApp: null as null | VoteRequestCounterContract,
 };
 
 // ---------------------------------------------------------------------------------------
@@ -39,6 +43,23 @@ const functions = {
     state.zkapp = new state.Add!(publicKey);
   },
 
+  // 4 func to call for my Voting Contract
+  // we load and compile the cnotract.Then we assign it with the pub key to the zk app
+  loadVoteContract: async (args: {}) => {
+    const { VoteRequestCounterContract } = await import(
+      "../../../contracts/build/src/VoteRequestCounterContract"
+    );
+    state.VoteRequestCounterContract = VoteRequestCounterContract;
+  },
+  compileVoteContract: async (args: {}) => {
+    await state.VoteRequestCounterContract!.compile();
+  },
+  // fetch can apply above one
+  initVoteInstance: async (args: { publicKey58: string }) => {
+    const publicKey = PublicKey.fromBase58(args.publicKey58);
+    state.voteApp = new state.VoteRequestCounterContract!(publicKey);
+  },
+
   // Start of Custom Calls
   getNum: async (args: {}) => {
     const currentNum = await state.zkapp!.num.get();
@@ -60,6 +81,13 @@ const functions = {
     });
     state.transaction = transaction;
   },
+
+  // Methods for my Vote Contract
+  fetchEvents: async () => {
+    const events = await state.voteApp!.fetchEvents();
+    return JSON.stringify(events[0].event);
+  },
+
   // End of Custom Calls
 
   proveUpdateTransaction: async (args: {}) => {
