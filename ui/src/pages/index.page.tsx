@@ -202,7 +202,7 @@ export default function Home() {
         console.log("zkApp compiled");
         setDisplayText("zkApp compiled...");
 
-        await zkappWorkerClient.initVoteInstance(zkappPublicKey);
+        await zkappWorkerClient.initVoteInstance(voteAppPublicKey);
 
         console.log("Getting zkApp state...");
         setDisplayText("Getting zkApp state...");
@@ -515,7 +515,7 @@ export default function Home() {
           </div>
 
           {/*  */}
-          {mainContent}
+          {/* {mainContent} */}
           {/*  */}
 
           <div className="grid grid-cols-2 gap-4 pt-2">
@@ -588,8 +588,10 @@ const FirstColumn = () => {
         Information
       </h2>
       <Progress value={progress} />
-      <div>Deposited Balance</div>
-      <div>Reputation</div>
+      <div>4000 Your Deposits</div>
+      <div>66000 Total Deposits</div>
+      <div>100000 Pool Size</div>
+      <div>123 Your Reputation</div>
       <h2 className="mt-10 scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight transition-colors first:mt-0">
         Deposit fund to the pool
       </h2>
