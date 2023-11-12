@@ -16,6 +16,7 @@
   "scripts": {
     "build": "tsc",
     "buildw": "tsc --watch",
+    "voter:main": "node run build && node build/src/VoterMapMain.js",
     "coverage": "node --experimental-vm-modules node_modules/jest/bin/jest.js --coverage",
     "format": "prettier --write --ignore-unknown **/*",
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
@@ -37,5 +38,10 @@
   },
   "peerDependencies": {
     "o1js": "0.14.*"
+  },
+  "dependencies": {
+    "@zkfs/contract-api": "^0.1.9-develop.275",
+    "@zkfs/safe-math": "^0.1.1-develop.275",
+    "snarkyjs": "^0.12.1"
   }
 }
