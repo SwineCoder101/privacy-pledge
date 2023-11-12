@@ -25,7 +25,7 @@ npm run build
 ```sh
 npm run test
 npm run testw # watch mode
-npm run test Add # test only one contract
+npm run test VoteRequestCounterContract # test only one contract
 ```
 
 ### How to deploy (Do only once, delete contract keys to deploy to a new contract address)
@@ -82,6 +82,46 @@ Couldn't send zkApp command: (invalid ("No verification key found for proved acc
 
 > Probably the wallet is connected to the wrong network
 
+
+### Issues:
+
+getActions: fromActionState not found.
+
+```rust
+    const events = await zkApp.reducer.getActions({
+      fromActionState: Field(0),
+      endActionState: Field(100000000),
+    });
+```
+
+TypeError: x.isConstant is not a function
+
+```rust
+
+```rust
+events = {
+    'add-merkle-leaf': Field,
+    'update-merkle-leaf': Field,
+  };
+```
+
+this.emitEvent('update-merkle-leaf', '234');
+
+solution:
+
+```
+    const txn = await Mina.transaction(senderAccount, () => {
+      zkApp.increment(Field(0), Field(1), Field(0));
+    });
+    await txn.prove();
+    await txn.sign([senderKey]).send();
+
+    const events = await zkApp.reducer.getActions();
+    expect(events).toEqual('hello world');
+```
+
+
+```
 # Tips
 
-Can check current zkApp states directly on the explorer
+For development on Testnet. Can check current zkApp states directly on the explorer
