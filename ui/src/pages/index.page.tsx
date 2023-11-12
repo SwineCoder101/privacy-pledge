@@ -12,7 +12,7 @@ let transactionFee = 0.1;
 const zkappPublicKey = PublicKey.fromBase58(
   "B62qpEozJn3aH6UQgwW4VYoK7fzriQx1SAaFptEtc3AfyeB2vc65Dmf"
 );
-const voteAppPublicKey = PublicKey.fromBase58("");
+const voteAppPublicKey = PublicKey.fromBase58("B62qqjc4jhRJAuAee8SpenKiB8yc1iQqu59gNAwynLZozSH5gVo97oH");
 
 const requestDatas = [
   {

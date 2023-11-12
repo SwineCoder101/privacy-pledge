@@ -81,6 +81,14 @@ export default class ZkappWorkerClient {
     const result = await this._call("fetchEvents", {});
     return result;
   }
+
+  initState() {
+    return this._call("initState", {});
+  }
+
+  increment() {
+    return this._call("increment", {});
+  }
   // End of Custom Calls
 
   proveUpdateTransaction() {

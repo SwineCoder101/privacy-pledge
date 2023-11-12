@@ -43,8 +43,11 @@ const functions = {
     state.zkapp = new state.Add!(publicKey);
   },
 
+  // *********************************************
+  // Setup of Vote Contract
+  // *********************************************
   // 4 func to call for my Voting Contract
-  // we load and compile the cnotract.Then we assign it with the pub key to the zk app
+  // we load and compile the cnotract. Then we assign it with the pub key to the zk app
   loadVoteContract: async (args: {}) => {
     const { VoteRequestCounterContract } = await import(
       "../../../contracts/build/src/VoteRequestCounterContract"
@@ -60,7 +63,9 @@ const functions = {
     state.voteApp = new state.VoteRequestCounterContract!(publicKey);
   },
 
+  // *********************************************
   // Start of Custom Calls
+  // *********************************************
   getNum: async (args: {}) => {
     const currentNum = await state.zkapp!.num.get();
     return JSON.stringify(currentNum.toJSON());
@@ -82,10 +87,24 @@ const functions = {
     state.transaction = transaction;
   },
 
-  // Methods for my Vote Contract
+  // >> Methods for my Vote Contract
   fetchEvents: async () => {
     const events = await state.voteApp!.fetchEvents();
     return JSON.stringify(events[0].event);
+  },
+
+  initState: async (args: {}) => {
+    const transaction = await Mina.transaction(() => {
+      state.voteApp!.initState(Field(0));
+    });
+    state.transaction = transaction;
+  },
+
+  increment: async (args: {}) => {
+    const transaction = await Mina.transaction(() => {
+      state.voteApp!.increment(Field(0), Field(1), Field(0));
+    });
+    state.transaction = transaction;
   },
 
   // End of Custom Calls
