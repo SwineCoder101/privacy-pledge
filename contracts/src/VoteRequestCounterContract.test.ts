@@ -64,12 +64,22 @@ describe('Add', () => {
   it ('increments and decrements the counter', async () => {
     await localDeploy();
     let num = zkApp.counter.get();
-    zkApp.increment(Field(0),Field(1),Field(0));
+
+    const txn = await Mina.transaction(senderAccount, () => {
+      zkApp.increment(Field(0), Field(1), Field(0));
+    });
+    await txn.prove();
+    await txn.sign([senderKey]).send();
     expect(num).toEqual(Field(0));
+
+    // It should works
+    // const events = await zkApp.reducer.getActions();
+    // expect(events).toEqual(
+    //   '[[{"balance": "28948022309329048855892746252171976963363056481941560715954676764349967630336", "counter": "1"}]]'
+    // );
 
     zkApp.decrement(Field(0),Field(1),Field(0));
     num = zkApp.counter.get();
     expect(num).toEqual(Field(0));
   });
-
 });
