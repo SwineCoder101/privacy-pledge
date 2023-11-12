@@ -41,7 +41,7 @@ export class VoterMapContract extends SmartContract {
       witness.calculateRoot(leaf).assertEquals(initialRoot);
   }
 
-    @method update(
+  @method update(
       leafWitness: MerkleWitness20,
       numberBefore: Field,
       incrementAmount: Field

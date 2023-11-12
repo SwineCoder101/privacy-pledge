@@ -26,6 +26,7 @@
     }
   
     @method public increment(id: Field, by: Field, balance: Field) {
+      this.counter.assertEquals(this.counter.get());  
       this.mutualFundId.assertEquals(id);
       const newCounter = this.counter.get().add(by);
       const newBalance = balance.sub(by);
@@ -34,6 +35,7 @@
     }
   
     @method public decrement(id: Field, by: Field, balance: Field) {
+        this.counter.assertEquals(this.counter.get());
         this.mutualFundId.assertEquals(id);
         const newCounter = this.counter.get().sub(by);
         this.counter.set(newCounter);
