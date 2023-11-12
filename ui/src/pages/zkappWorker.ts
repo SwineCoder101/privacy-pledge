@@ -89,8 +89,8 @@ const functions = {
 
   // >> Methods for my Vote Contract
   fetchEvents: async () => {
-    const events = await state.voteApp!.fetchEvents();
-    return JSON.stringify(events[0].event);
+    const events = await state.voteApp!.reducer.getActions();
+    return JSON.stringify(events[0][0]);
   },
 
   initState: async (args: {}) => {

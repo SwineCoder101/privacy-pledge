@@ -1,4 +1,6 @@
 import { Add } from './Add.js';
-import { OracleExample } from './OracleExample.js';
+import { ReputationOracle } from './ReputationOracle.js';
+import { VoterMapContract } from './VoterMapContract.js';
+import { VoteRequestCounterContract } from './VoteRequestCounterContract.js';
 
-export { Add, OracleExample };
+export { Add, ReputationOracle, VoterMapContract, VoteRequestCounterContract };

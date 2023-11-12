@@ -12,7 +12,7 @@ import {
 const ORACLE_PUBLIC_KEY =
   'B62qph1U5UQofXsN1gRPtJAH4GCGkaSSozUysqV7e3S8rRdcUaWyaWi';
 
-export class OracleExample extends SmartContract {
+export class ReputationOracle extends SmartContract {
   // Define contract state
   @state(PublicKey) oraclePublicKey = State<PublicKey>();
 
@@ -29,17 +29,12 @@ export class OracleExample extends SmartContract {
     this.requireSignature();
   }
 
-  @method verify(id: Field, creditScore: Field, signature: Signature) {
-    // Get the oracle public key from the contract state
+  @method verify(id: Field, reputation: Field, signature: Signature) {
     const oraclePublicKey = this.oraclePublicKey.get();
     this.oraclePublicKey.assertEquals(oraclePublicKey);
-    // Evaluate whether the signature is valid for the provided data
-    const validSignature = signature.verify(oraclePublicKey, [id, creditScore]);
-    // Check that the signature is valid
+    const validSignature = signature.verify(oraclePublicKey, [id, reputation]);
     validSignature.assertTrue();
-    // Check that the provided credit score is greater than 700
-    creditScore.assertGreaterThanOrEqual(Field(700));
-    // Emit an event containing the verified users id
+    reputation.assertGreaterThanOrEqual(Field(700));
     this.emitEvent('verified', id);
   }
 }
@@ -49,18 +44,18 @@ export class OracleExample extends SmartContract {
  * - myBalance(voter publicKey): Number
  * - myReputation(voter publicKey): Number
  * - voteAmount(proposalId Number): Number
- * 
+ *
  * - shareVotes(voter publicKey): Number
  * - totalBalance(): Number
  * - votesYes(proposalId Number): Number
  * - votesNo(proposalId Number): Number
  * - votingPower(vp Number): Number
- * - requests(): 
- * 
+ * - requests():
+ *
  * @method
  * - deposit(amount, voter publicKey)
  * - vote(proposalId Number,(yes, no) bool, voter publicKey)
- * 
+ *
  * - requestFund(details String, amount Number)
  * -- with default deadline like 3 days
  * -- Calls oracle to update voting power with reputation
@@ -68,7 +63,6 @@ export class OracleExample extends SmartContract {
  */
 
 // oracle. get number of investments, size of investements, total return, number of investees, last investment date
-
 
 /**
  * @state

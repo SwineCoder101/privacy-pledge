@@ -1,4 +1,4 @@
-import { OracleExample } from './OracleExample';
+import { ReputationOracle } from './ReputationOracle';
 import {
   Field,
   Mina,
@@ -14,17 +14,17 @@ let proofsEnabled = false;
 const ORACLE_PUBLIC_KEY =
   'B62qph1U5UQofXsN1gRPtJAH4GCGkaSSozUysqV7e3S8rRdcUaWyaWi';
 
-describe('OracleExample', () => {
+describe('ReputationOracle', () => {
   let deployerAccount: PublicKey,
     deployerKey: PrivateKey,
     senderAccount: PublicKey,
     senderKey: PrivateKey,
     zkAppAddress: PublicKey,
     zkAppPrivateKey: PrivateKey,
-    zkApp: OracleExample;
+    zkApp: ReputationOracle;
 
   beforeAll(async () => {
-    if (proofsEnabled) await OracleExample.compile();
+    if (proofsEnabled) await ReputationOracle.compile();
   });
 
   beforeEach(() => {
@@ -36,7 +36,7 @@ describe('OracleExample', () => {
       Local.testAccounts[1]);
     zkAppPrivateKey = PrivateKey.random();
     zkAppAddress = zkAppPrivateKey.toPublicKey();
-    zkApp = new OracleExample(zkAppAddress);
+    zkApp = new ReputationOracle(zkAppAddress);
   });
 
   async function localDeploy() {
@@ -49,7 +49,7 @@ describe('OracleExample', () => {
     await txn.sign([deployerKey, zkAppPrivateKey]).send();
   }
 
-  it('generates and deploys the `OracleExample` smart contract', async () => {
+  it('generates and deploys the `ReputationOracle` smart contract', async () => {
     await localDeploy();
     const oraclePublicKey = zkApp.oraclePublicKey.get();
     expect(oraclePublicKey).toEqual(PublicKey.fromBase58(ORACLE_PUBLIC_KEY));

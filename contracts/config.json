@@ -64,6 +64,14 @@
       "feepayerAlias": "zkhack-wallet",
       "fee": "0.1",
       "smartContract": "VoteRequestCounterContract"
+    },
+    "test9": {
+      "url": "https://proxy.berkeley.minaexplorer.com/graphql",
+      "keyPath": "keys/test9.json",
+      "feepayerKeyPath": "keys/zkhack-wallet.json",
+      "feepayerAlias": "zkhack-wallet",
+      "fee": "0.1",
+      "smartContract": "ReputationOracle"
     }
   }
 }
