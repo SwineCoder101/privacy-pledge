@@ -10,7 +10,7 @@ let transactionFee = 0.1;
 
 // TODO: Update the PublicKey everytime a new smart contract is deployed to the testnet
 const zkappPublicKey = PublicKey.fromBase58(
-  "B62qpEozJn3aH6UQgwW4VYoK7fzriQx1SAaFptEtc3AfyeB2vc65Dmf"
+  "B62qqjc4jhRJAuAee8SpenKiB8yc1iQqu59gNAwynLZozSH5gVo97oH"
 );
 const voteAppPublicKey = PublicKey.fromBase58(
   "B62qqjc4jhRJAuAee8SpenKiB8yc1iQqu59gNAwynLZozSH5gVo97oH"
@@ -218,6 +218,7 @@ export default function Home() {
           hasBeenSetup: true,
           publicKey,
           zkappPublicKey,
+          voteAppPublicKey,
           accountExists,
         });
       }
@@ -469,18 +470,6 @@ export default function Home() {
         >
           Get Latest Reputation
         </Button>
-        <Button
-          onClick={async () => {
-            await state.zkappWorkerClient!.fetchAccount({
-              publicKey: state.zkappPublicKey!,
-            });
-            const lastEvent: any = await state.zkappWorkerClient!.fetchEvents();
-            console.log(`Current state in zkApp: ${lastEvent.toString()}`);
-            setDisplayText("");
-          }}
-        >
-          Test fetch Events
-        </Button>
       </div>
     );
   }
@@ -496,6 +485,65 @@ export default function Home() {
         >
           Vote
         </Button>
+      </div>
+    );
+  };
+
+  const FirstColumn = () => {
+    const [progress, setProgress] = React.useState(13);
+    const [, set] = useState();
+
+    React.useEffect(() => {
+      const timer = setTimeout(() => setProgress(66), 500);
+      return () => clearTimeout(timer);
+    }, []);
+
+    const handleDeposit = () => {
+      // Logic to handle depositing balance
+    };
+
+    return (
+      <div className="h-12">
+        <h2 className="mt-10 scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight transition-colors first:mt-0">
+          Information
+        </h2>
+        <Progress value={progress} />
+        <div>4000 Your Deposits</div>
+        <div>66000 Total Deposits</div>
+        <div>100000 Pool Size</div>
+        <div>123 Your Reputation</div>
+        <h2 className="mt-10 scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight transition-colors first:mt-0">
+          Deposit fund to the pool
+        </h2>
+        <div className="flex items-center justify-between mt-4">
+          <Input
+            type="number"
+            placeholder="Set Amount"
+            className="border border-gray-300 rounded-md px-2 py-1 w-full"
+          />
+          <Button
+            className=" text-white px-4 py-2 rounded-md"
+            onClick={handleDeposit}
+          >
+            Deposit
+          </Button>
+        </div>
+
+        <div className="pt-4">
+          <Button
+            onClick={async () => {
+              await state.zkappWorkerClient!.fetchAccount({
+                publicKey: state.voteAppPublicKey!,
+              });
+              const lastEvent: any =
+                await state.zkappWorkerClient!.fetchEvents();
+              console.log(`Current state in zkApp: ${lastEvent.toString()}`);
+              setDisplayText("");
+            }}
+          >
+            Show
+          </Button>
+        </div>
       </div>
     );
   };
@@ -569,45 +617,3 @@ interface Item {
   title: string;
   description: string;
 }
-
-const FirstColumn = () => {
-  const [progress, setProgress] = React.useState(13);
-
-  React.useEffect(() => {
-    const timer = setTimeout(() => setProgress(66), 500);
-    return () => clearTimeout(timer);
-  }, []);
-
-  const handleDeposit = () => {
-    // Logic to handle depositing balance
-  };
-
-  return (
-    <div className="h-12">
-      <h2 className="mt-10 scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight transition-colors first:mt-0">
-        Information
-      </h2>
-      <Progress value={progress} />
-      <div>4000 Your Deposits</div>
-      <div>66000 Total Deposits</div>
-      <div>100000 Pool Size</div>
-      <div>123 Your Reputation</div>
-      <h2 className="mt-10 scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight transition-colors first:mt-0">
-        Deposit fund to the pool
-      </h2>
-      <div className="flex items-center justify-between mt-4">
-        <Input
-          type="number"
-          placeholder="Set Amount"
-          className="border border-gray-300 rounded-md px-2 py-1 w-full"
-        />
-        <Button
-          className=" text-white px-4 py-2 rounded-md"
-          onClick={handleDeposit}
-        >
-          Deposit
-        </Button>
-      </div>
-    </div>
-  );
-};
