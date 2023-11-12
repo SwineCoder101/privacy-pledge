@@ -7,12 +7,12 @@
     method, state
 } from 'o1js';
 
-  class VoteRequest extends Struct ({
+  export class VoteRequest extends Struct ({
     counter: Field,
     balance: Field
   }){}
   
-  class VoteRequestCounterContract extends SmartContract {
+  export class VoteRequestCounterContract extends SmartContract {
     public defaultCounterValue = Field(0);
 
     reducer = Reducer({ actionType: VoteRequest });
@@ -44,7 +44,7 @@
     @method public vote(id: Field, by: Field, balance: Field) {
         this.increment(id, by, balance);
     }
-    
+
   }
   
   export default VoteRequestCounterContract;
